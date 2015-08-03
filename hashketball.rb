@@ -1,3 +1,4 @@
+=begin
 require 'pry'
 
 def game_hash
@@ -26,6 +27,78 @@ def game_hash
     }     
   }
 end
+=end
+
+# code from lab review
+=begin
+def home_team
+  game_hash[:home]
+end
+
+def away_team
+  game_hash[:away]
+end
+
+def all_players
+  home_team[:players] + away_team[:players]
+end
+
+def find_player_by_name(name)
+  found_player = all_players.find { |p| p[:player_name] == name }
+  yield(found_player) if found_player
+end
+
+def num_points_scored(player)
+  found_player = find_player_by_name(player)
+  found_player[:points] if found_player
+end
+
+def shoe_size(name)
+  # found_player = find_player_by_name(name)
+  # found_player[:shoe] if found_player
+  find_player_by_name(name) do |player|
+    player[:shoe]
+  end
+end
+
+def find_team_by_name(name)
+  if home_team[:team_name] == name
+    home_team
+  else
+    away_team
+  end
+end
+
+def team_colors(team)
+  found_team = find_team_by_name(team)
+  found_team[:colors] if found_team
+end
+
+def team_names
+  [home_team[:team_name], away_team[:team_name]]
+end
+
+def player_numbers(team)
+  find_team_by_name(team)[:players].map { |p| p[:number] }
+end
+
+def player_stats(player)
+  # found_player = find_player_by_name(player)
+  # found_player.delete(player_name)
+  # found_player
+
+  find_player_by_name(player) do |player|
+    player.delete(:player_name)
+    player
+  end
+end
+
+def big_shoe_rebounds
+  big_foot = all_players_sort_by { |player| player[:shoe].last[:rebounds] }
+                                    # could also do -player[:shoe].first[:rebounds] in sort_by
+                                    # the - in front reverses the order 
+end
+=end
 
 def num_points_scored(player)
   game_hash.each do |location, team_data|
