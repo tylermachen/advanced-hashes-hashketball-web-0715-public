@@ -1,4 +1,3 @@
-=begin
 require 'pry'
 
 def game_hash
@@ -27,7 +26,6 @@ def game_hash
     }     
   }
 end
-=end
 
 # code from lab review
 =begin
